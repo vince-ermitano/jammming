@@ -71,6 +71,9 @@ const Spotify = {
         if (!name || !trackUris.length) {
             return Promise.reject('Name or trackUris is empty');
         }
+
+        // add loading screen
+
         const access_token = Spotify.getAccessToken();
         const headers = { Authorization: `Bearer ${access_token}` };
         let userId;
