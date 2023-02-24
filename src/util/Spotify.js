@@ -72,7 +72,9 @@ const Spotify = {
             return Promise.reject('Name or trackUris is empty');
         }
 
-        // add loading screen
+        // turn on loading animation
+        const loading = document.querySelector('.loader');
+        loading.style.display = 'block';
 
         const access_token = Spotify.getAccessToken();
         const headers = { Authorization: `Bearer ${access_token}` };
@@ -95,6 +97,11 @@ const Spotify = {
                             method: 'POST',
                             body: JSON.stringify({ uris: trackUris })
                         });
+                    })
+                    .then(response => {
+                        // turn off loading animation
+                        loading.style.display = 'none';
+                        return response.json();
                     });
             });
     }
